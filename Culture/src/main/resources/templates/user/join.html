@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문화센터: 회원가입</title>
+    <link rel="stylesheet" href="/src/main/resources/static/css/style.css" th:href="@{/css/style.css}"> 
+    <link rel="stylesheet" href="/src/main/resources/static/css/join.css" th:href="@{/css/join.css}">   
+</head>
+<body>
+    <header>
+        <a id="logo" href="/src/main/resources/templates/home.html" th:href="@{/}">
+            <img src="/src/main/resources/static/img/logo.png" th:src="@{/img/logo.png}" alt="문화센터 로고" width="200px"></a>
+
+        <ul class="header_menu">
+            <li><a href="/src/main/resources/templates/program/list.html" th:href="@{/program/list}">수강 신청</a></li>
+            <li><a href="/src/main/resources/templates/entry/list.html" th:href="@{/entry/list}">수강 내역</a></li>
+        </ul>
+
+        <!-- 로그인 X -->
+        <th:block th:if="${session.user == null}">
+	        <ul class="login_menu">
+	            <li><a href="/src/main/resources/templates/user/login.html" th:href="@{/user/login}">로그인</a></li>
+	            <li><a href="/src/main/resources/templates/user/join.html" th:href="@{/user/join}">회원가입</a></li>
+	        </ul>
+        </th:block>
+    </header>
+
+    <section>
+        <div id="title">
+            <hr/>
+            <h1>회원가입</h1>
+        </div>
+
+        <form id="joinform" method="post">
+            <!-- ID -->
+            <div class="wrap">
+                <h3 class="join_title">
+                    <label for="id">아이디</label>
+                </h3>
+                <span class="box int_id">
+                    <input type="text" id="id" class="int" maxlength="20" name="userId">
+                </span>
+                <span class="error_next_box e1">에러출력</span>
+            </div>
+            
+            <!-- PW1 -->
+            <div class="wrap">
+                <h3 class="join_title">
+                    <label for="pswd1">비밀번호</label>
+                </h3>
+                <span class="box int_pass">
+                    <input type="password" id="pswd1" class="int" maxlength="20" name="userPw">
+                    <span id="alertTxt">사용불가</span>
+                    <img src="/img/m_icon_pass.png" id="pswd1_img1" class="pswdImg" alt="비밀번호">
+                </span>
+                <span class="error_next_box e2">에러출력</span>
+            </div>
+            
+            <!-- PW2 -->
+            <div class="wrap">
+                <h3 class="join_title">
+                    <label for="pswd2">비밀번호 재확인</label>
+                </h3>
+                <span class="box int_pass_check">
+                    <input type="password" id="pswd2" class="int" maxlength="20">
+                    <span id="alertTxt">사용불가</span>
+                    <img src="/img/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg" alt="비밀번호 재확인">
+                </span>
+                <span class="error_next_box e3">에러출력</span>
+            </div>
+            
+            <!-- 이름 -->
+            <div class="wrap">
+                <h3 class="join_title">
+                    <label for="name">이름</label>
+                </h3>
+                <span class="box int_name">
+                    <input type="text" id="name" class="int" maxlength="20" name="userName">
+                </span>
+                <span class="error_next_box e4">에러출력</span>
+            </div>
+
+            <!-- 생년월일 -->
+            <div class="wrap">
+                <h3 class="join_title">
+                    <label for="yy">생년월일</label>
+                </h3>
+
+                <div id="bir_wrap">
+                    <!-- 생년 -->
+                    <div id="bir_yy">
+                        <span class="box">
+                            <input type="text" id="yy" class="int" maxlength="4" placeholder="년(4)" name="birthYear" >
+                        </span>
+                    </div><!-- 생년 -->
+
+                    <!-- 생월 -->
+                    <div id="bir_mm">
+                        <span class="box">
+                            <select id="mm" class="sel" name="birthMonth">
+                                <option>월</option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="09">9</option>
+                                <option value="08">8</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </span>
+                    </div><!-- 생월 -->
+
+                    <!-- 생일 -->
+                    <div id="bir_dd">
+                        <span class="box">
+                            <input type="text" id="dd" class="int" maxlength="2" placeholder="일" name="birthDay" >
+                        </span>
+                    </div><!-- 생일 -->
+                </div><!-- bir_wrap -->
+                <span class="error_next_box e5"></span>
+            </div>
+            
+            <!-- 성별 -->
+            <div class="wrap">
+                <h3 class="join_title">
+                    <label for="gender">성별</label>
+                </h3>
+                <span class="box gender_code">
+                    <select id="gender" class="sel" name="gender">
+                        <option>성별</option>
+                        <option value="M">남자</option>
+                        <option value="F">여자</option>
+                    </select>
+                </span>
+                <span class="error_next_box e6">에러출력</span>
+            </div>
+            
+            <!-- 주소 -->
+            <div class="wrap">
+                <label class="join_title">주소</label>
+                <span class="int_address1">
+                    <input name="postCode" type="text" id="postCode" class="box addr_code" placehorder="우편번호">
+                    <input type="text" class="btn_addr" onclick="btnPostCode()" value="우편번호 찾기">
+                </span>
+                <span class="int_address2">
+                    <input name="address" type="text" id="address" class="box addr" placeholder="주소">
+                    <input name="detailAddress" type="text" id="detailAddress" class="box addr" placeholder="상세주소">
+                    <input name="extraAddress" type="text" id="extraAddress" class="box addr" placeholder="참고항목">
+                </span>
+            </div>
+            
+            <!-- 이메일 -->
+            <div class="wrap">
+                <h3 class="join_title">
+                    <label for="email">본인확인 이메일
+                        <span class="optional">(선택)</span>
+                    </label>
+                </h3>
+                <span class="box int_email">
+                    <input type="text" id="email" class="int" maxlength="100" placeholder="선택입력" name="email">
+                </span>
+                <span class="error_next_box e7">이메일 주소를 다시 확인해 주세요.</span>
+            </div>
+            
+            <!-- 휴대전화 -->
+            <div class="wrap">
+                <h3 class="join_title">
+                    <label for="phoneno">휴대전화
+                    </label>
+                </h3>
+                <span class="box int_mobile">
+                    <input type="text" id="phoneno" class="int" maxlength="16" placeholder="전화번호 입력" name="tel">
+                </span>
+                <span class="error_next_box e8">에러출력</span>
+            </div>
+
+            <button id="join_button" type="submit">가입하기</button>
+        </form>
+    </section>
+
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문화센터 : 수강 리스트</title>
+    <link rel="stylesheet" href="/src/main/resources/static/css/style.css" th:href="@{/css/style.css}"> 
+    <link rel="stylesheet" href="/src/main/resources/static/css/prg_list.css" th:href="@{/css/prg_list.css}">   
+</head>
+
+<body>
+    <header>
+        <a id="logo" href="/src/main/resources/templates/home.html" th:href="@{/}">
+            <img src="/src/main/resources/static/img/logo.png" th:src="@{/img/logo.png}" alt="문화센터 로고" width="200px"></a>
+
+        <ul class="header_menu">
+            <li><a href="/src/main/resources/templates/program/list.html" th:href="@{/program/list}">수강 신청</a></li>
+            <li><a href="/src/main/resources/templates/entry/list.html" th:href="@{/entry/list}">수강 내역</a></li>
+        </ul>
+
+        <!-- 로그인 X -->
+        <th:block th:if="${session.user == null}">
+	        <ul class="login_menu">
+	            <li><a href="/src/main/resources/templates/user/login.html" th:href="@{/user/login}">로그인</a></li>
+	            <li><a href="/src/main/resources/templates/user/join.html" th:href="@{/user/join}">회원가입</a></li>
+	        </ul>
+        </th:block>
+        <!-- 로그인 O -->
+        <th:block th:if="${session.user != null}">
+	        <ul class="login_menu">
+	        	<li><span>[[${session.user.userName}]]님</span></li>
+	        	<li><a th:href="@{/user/logout}">로그아웃</a></li>
+	        </ul>
+        </th:block>
+    </header>
+    <section>
+        <div id="title">
+            <hr>
+            <h1>수강 리스트</h1>
+        </div>
+
+        <!-- 검색 테이블 -->
+        <form id="search_tb" th:action="@{/program/list.do}" th:object="${searchDto}" method="get">
+            <table>
+                <tr>
+                    <td class="td_fix">수강과목</td>
+                    <td colspan="5">
+                        <select id="subject" name="subject" th:field="*{subject}">
+                            <option value="">=== 선택 ===</option>
+                            <option th:value="${ds}" th:each="ds : ${dropSubject}">
+                                <p th:text="${ds}"></p>
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_fix">교육일</td>
+                    <td>
+                        <select id="day" name="day" th:field="*{day}">
+                            <option value="">=== 선택 ===</option>
+                            <option th:value="${dd}" th:each="dd : ${dropDay}">
+                                <p th:text="${dd}"></p>
+                            </option>
+                        </select>
+                    </td>
+                    <td class="td_fix">교육시간</td>
+                    <td class="time_start">
+                        <select id="classStart" name="classStart" th:field="*{classStart}">
+                            <option value='00:00:00'>=== 선택 ===</option>
+                            <option th:value="${ds} + ':00'" th:each="ds : ${dropStart}">
+                                <p th:text="${ds}"></p>
+                            </option>
+                        </select>
+                    </td>
+                    <td class="time_block"><p>~</p></td>
+                    <td class="time_end">
+                        <select id="classEnd" name="classEnd" th:field="*{classEnd}">
+                            <option value='00:00:00'>=== 선택 ===</option>
+                            <option th:value="${de} + ':00'" th:each="de : ${dropEnd}">
+                                <p th:text="${de}"></p>
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td_fix">대상</td>
+                    <td colspan="1">
+                        <select id="person" name="person" th:field="*{person}">
+                            <option value="">=== 선택 ===</option>
+                            <option th:value="${dp}" th:each="dp : ${dropPerson}">
+                                <p th:text="${dp}"></p>
+                            </option>
+                        </select>
+                    </td>
+                    <td class="td_fix">참가비</td>
+                    <td colspan="3">
+                        <select id="payment" name="payment" th:field="*{payment}">
+                            <option value=0>=== 선택 ===</option>
+                            <option th:value="${dp}" th:each="dp : ${dropPayment}">
+                                <p th:text="${dp}"></p>
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="btn_wrap">
+                <input id="btnSearch" type="submit" value="조회하기"></input>
+            </div>
+        </form>
+
+        <!-- 리스트 테이블 -->
+        <div id="list_tb">
+            <table>
+                <thead>
+                    <td>No</td>
+                    <td>수강 과목</td>
+                    <td>교육일</td>
+                    <td>교육시간</td>
+                    <td>대상</td>
+                    <td>참가비</td>
+                    <td>정원</td>
+                    <td>신청</td>
+                </thead>
+                
+                <tr th:each="f, number : ${findList}">
+                    <td th:text="${number.count}"></td>
+                    <td th:text="${f.subject}"></td>
+                    <td th:text="${f.day}"></td>
+                    <td th:text="${#calendars.format(f.classStart, 'HH:mm')} + ' ~ ' + ${#calendars.format(f.classEnd, 'HH:mm')}"></td>
+                    <td th:text="${f.person}"></td>
+                    <td th:text="${f.payment}"></td>
+                    <td th:text="${f.countCurrent} + ' / ' + ${f.countMax}"></td>
+                    <td id="btn_submit_wrap">
+                        <!-- 로그인 X -->
+                        <th:block th:if="${session.user == null}">
+                            <button th:id="${f.prgCode}" class="btn_submit unlogin">신청하기</button>
+                        </th:block>
+                        
+                        <!-- 로그인 O -->
+                        <th:block th:if="${session.user != null}">
+                            <button th:id="${f.prgCode}" type="submit" class="btn_submit login">신청하기</button>
+                        </th:block>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </section>
+    <script>
+        var btns = document.querySelectorAll('.unlogin');
+        var btnSubs = document.querySelectorAll('.login');
+
+        btns.forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                console.log(button.id);
+                alert('로그인이 필요합니다.');
+                e.preventDefault();
+            });
+        });
+        
+        btnSubs.forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                var id = button.id;
+                var loc = "http://localhost/program/submit/" + id;
+                
+                console.log(loc);
+                
+                location.href = loc;
+            });
+        });
+
+        // http://localhost/program/list.do?subject=%EC%88%98%EC%98%81&day=%EC%A3%BC+5%EC%9D%BC&classStart=06%3A00%3A00&classEnd=06%3A50%3A00&person=%EC%84%B1%EC%9D%B8&payment=35000
+    </script>
+</body>
+</html>

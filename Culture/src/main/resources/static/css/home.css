@@ -1,0 +1,209 @@
+#top {
+    height: 400px;
+    background : url(../img/culture_main.jpg) no-repeat center;
+    overflow: hidden;
+}
+
+#center {
+    margin: 50px 50px 0px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* 캘린더 */
+.cal_tit {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+    float: left;
+    overflow: hidden;
+    width: 150px;
+    height: 300px;
+    padding: 25px 0;
+    background-color: #5CD1E5;
+    text-align: center;
+}
+
+.cal_tit p {
+    margin-bottom: 30px;
+    background-color: #5CD1E5;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.cal_tit p::after {
+    content: '';
+    position: absolute;
+    margin-left: -11px;
+    top: 50%;
+    left: 50%;
+    bottom: 0;
+    width: 22px;
+    height: 3px;
+    background-color: #fff;
+}
+
+.cal_tit h3 {
+    color: #fff;
+    background-color: #5CD1E5;
+    font-size: 25px;
+}
+
+.cal_idx {
+    position: relative;
+    float: right;
+    display: block;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #9E9E9E;
+    border-left: 0;
+    text-align: center;
+}
+
+.cal_idx table {
+    position: relative;
+    padding: 5px;
+    margin: 20px auto;
+}
+
+.cal_idx table thead {
+    position: relative;
+    top: -5px;
+}
+
+.cal_idx table thead::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    background-color: #dedede;
+    width: 210px;
+    height: 2px;
+}
+
+.cal_idx table thead::before {
+    content: '';
+    position: absolute;
+    background-color: #dedede;
+    left: 10px;
+    width: 210px;
+    height: 2px;
+}
+
+.cal_idx table thead tr th:first-child {
+    color: #F15F5F;
+}
+
+.cal_idx table thead tr th:last-child {
+    color: #6799FF;
+}
+
+.cal_event01 {
+    padding: 2px 4px;
+    background-color: rgba(255, 131, 131, 0.5);
+    border-radius: 50%;
+}
+
+
+td {padding: 3px 5px;}
+
+.cal_idx ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.cal_idx ul li {
+    position: relative;
+    padding-left: 20px;
+}
+.cal_idx ul li::before {
+    position: absolute;
+    content: '';
+    padding: 3px;
+    top: 6px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.cal_idx ul li::before {
+    background-color: rgba(255, 131, 131, 0.5);
+}
+
+/* 공지사항 */
+.cnt_center {}
+
+.notice {
+    position: relative;
+    padding: 30px auto;    
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 20px 20px;
+    width: 300px;
+    height: 300px;
+    background-color: #dedede;
+}
+
+.notice h2 {
+    background-color: #96C64E;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 3px 0;
+    border-radius: 5px;
+    color: #F6F6F6;
+    text-align: center;
+}
+
+.notice ul li {
+    position: relative;
+    background-color: #dedede;
+    padding: 10px 0px 10px 20px;
+}
+
+.notice ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+}
+
+.notice ul li a {
+    background-color: #dedede;
+}
+
+.cnt_right {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 시설안내 */
+.cnt_right ul p {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 60px auto 15px;
+    width: 400PX;
+    height: 70PX;
+    color: #fff;
+    font-weight:550;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.cnt_right .time p {
+    background-color: #36A6B3;
+}
+
+.cnt_right .tel p {
+    background-color: #9E9E9E;
+}
+

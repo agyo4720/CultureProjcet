@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA LIST</title>
+    <style>
+        table, td {
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+
+        .header {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>USER LIST</h2>
+    <table>
+        <tr class="header">
+            <td>ID</td>
+            <td>PW</td>
+            <td>NAME</td>
+            <td>BIRTH</td>
+            <td>GENDER</td>
+            <td>ADDRESS</td>
+            <td>EMAIL</td>
+            <td>MOBILE</td>
+        </tr>
+        <tr th:each="u : ${uList}">
+            <td th:text="${u.userId}">${user.userId}</td>
+            <td th:text="${u.userPw}">${user.userPw}</td>
+            <td th:text="${u.userName}">${user.userName}</td>
+            <td th:text="${u.birth}">${user.birth}</td>
+            <td th:text="${u.gender}">${user.gender}</td>
+            <td th:text="${u.address}">${user.address}</td>
+            <td th:text="${u.email}">${user.email}</td>
+            <td th:text="${u.tel}">${user.tel}</td>
+        </tr>
+    </table>
+
+    <h2>PROGRAM LIST</h2>
+    <table>
+        <tr class="header">
+            <td>CODE</td>
+            <td>NAME</td>
+            <td>DAY</td>
+            <td>START</td>
+            <td>END</td>
+            <td>PERSON</td>
+            <td>CURRENT</td>
+            <td>MAX</td>
+            <td>PAYMENT</td>
+        </tr>
+        <tr th:each="p : ${pList}">
+            <td th:text="${p.prgCode}">${prg.prgCode}</td>
+            <td th:text="${p.subject}">${prg.subject}</td>
+            <td th:text="${p.day}">${prg.day}</td>
+            <td th:text="${p.classStart}" a>${prg.classStart}</td>
+            <td th:text="${p.classEnd}">${prg.classEnd}</td>
+            <td th:text="${p.person}">${prg.person}</td>
+            <td th:text="${p.countCurrent}">${prg.countCurrent}</td>
+            <td th:text="${p.countMax}">${prg.countMax}</td>
+            <td th:text="${p.payment}">${prg.payment}</td>
+        </tr>
+    </table>
+
+    <h2>ENTRY LIST</h2>
+    <table>
+        <tr class="header">
+            <td>NUM</td>
+            <td>START</td>
+            <td>END</td>
+            <td>ID</td>
+            <td>CODE</td>
+        </tr>
+        <tr th:each="e : ${eList}">
+            <td th:text="${e.entId}">${ent.entId}</td>
+            <td th:text="${e.submitStart}">${ent.submitStart}</td>
+            <td th:text="${e.submitEnd}">${ent.submitEnd}</td>
+            <td th:text="${e.user.getUserId}">${ent.user.getUserId}</td>
+            <td th:text="${e.program.getPrgCode}">${ent.pgCode.getPrgCode}</td>
+        </tr>
+    </table>
+    
+</body>
+</html>

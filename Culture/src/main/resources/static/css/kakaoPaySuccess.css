@@ -1,0 +1,25 @@
+#center {
+    margin: 0 auto;
+    width: 500px;
+}
+
+#center p {
+    text-align: center;
+    margin: 0 0 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+table, td {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+table {
+    margin: 0 auto;
+}
+
+td {
+    padding: 10px;
+    background-color: #fff;
+}

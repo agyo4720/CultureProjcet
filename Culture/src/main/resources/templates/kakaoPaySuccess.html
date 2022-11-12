@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문화센터 : 결제 완료</title>
+    <link rel="stylesheet" href="/src/main/resources/static/css/style.css" th:href="@{/css/style.css}"> 
+    <link rel="stylesheet" href="/src/main/resources/static/css/kakaoPaySuccess.css" th:href="@{/css/kakaoPaySuccess.css}">
+</head>
+<body>
+    <header>
+        <a id="logo" href="/src/main/resources/templates/home.html" th:href="@{/}">
+            <img src="/src/main/resources/static/img/logo.png" th:src="@{/img/logo.png}" alt="문화센터 로고" width="200px"></a>
+
+        <ul class="header_menu">
+            <li><a href="/src/main/resources/templates/program/list.html" th:href="@{/program/list}">수강 신청</a></li>
+            <li><a href="/src/main/resources/templates/program/entry.html" th:href="@{/program/entry}">수강 내역</a></li>
+        </ul>
+
+        <!-- 로그인 O -->
+        <th:block th:if="${session.user != null}">
+	        <ul class="login_menu"> 
+	        	<li><span>[[${session.user.userName}]]님</span></li>
+	        	<li><a th:href="@{/user/logout}">로그아웃</a></li>
+	        </ul>
+        </th:block>
+    </header>
+
+    <section>
+        <div id="title">
+            <hr/>
+            <h1>결제 완료</h1>
+        </div>
+        
+        <div id="center">
+            <p>카카오페이 결제가 정상적으로 완료되었습니다.</p>
+        
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>결제 일시</td>
+                        <td>[[${info.approved_at}]]</td>
+                    </tr>
+                    <tr>
+                        <td>주문번호</td>
+                        <td>[[${info.partner_order_id}]]</td>
+                    </tr>
+                    <tr>
+                        <td>상품명</td>
+                        <td>[[${info.item_name}]]</td>
+                    </tr>
+                    <tr>
+                        <td>결제금액</td>
+                        <td>[[${info.amount.total}]]</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+    </section>
+
+</body>
+</html>

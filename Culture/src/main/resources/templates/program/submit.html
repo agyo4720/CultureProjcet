@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문화센터 : 수강 신청</title>
+    <link rel="stylesheet" href="/src/main/resources/static/css/style.css" th:href="@{/css/style.css}"> 
+    <link rel="stylesheet" href="/src/main/resources/static/css/prg_submit.css" th:href="@{/css/prg_submit.css}">   
+</head>
+<body>
+    <header>
+        <a id="logo" href="/src/main/resources/templates/home.html" th:href="@{/}">
+            <img src="/src/main/resources/static/img/logo.png" th:src="@{/img/logo.png}" alt="문화센터 로고" width="200px"></a>
+
+        <ul class="header_menu">
+            <li><a href="/src/main/resources/templates/program/list.html" th:href="@{/program/list}">수강 신청</a></li>
+            <li><a href="/src/main/resources/templates/entry/list.html" th:href="@{/entry/list}">수강 내역</a></li>
+        </ul>
+
+        <!-- 로그인 X -->
+        <th:block th:if="${session.user == null}">
+	        <ul class="login_menu">
+	            <li><a href="/src/main/resources/templates/user/login.html" th:href="@{/user/login}">로그인</a></li>
+	            <li><a href="/src/main/resources/templates/user/join.html" th:href="@{/user/join}">회원가입</a></li>
+	        </ul>
+        </th:block>
+        <!-- 로그인 O -->
+        <th:block th:if="${session.user != null}">
+	        <ul class="login_menu">
+	        	<li><span value="session.user.userName">[[${session.user.userName}]]님</span></li>
+	        	<li><a th:href="@{/user/logout}">로그아웃</a></li>
+	        </ul>
+        </th:block>
+    </header>
+
+    <section>
+        <div id="title">
+            <hr/>
+            <h1>수강 신청하기</h1>
+        </div>
+        
+        <form th:action="@{/kakaoPay}" th:object="${submitDto}" method="post">
+            <div class="result" th:each="s : ${submitDto}">
+                <div class="res title">
+                    <h3>수강 과목</h3>
+                    <p id="subject_val" th:value="${s.subject}" th:text="${s.subject}" th:field="*{subject}">${s.subject}</p>
+                </div>
+                <div class="res day">
+                    <h3>수강일</h3>
+                    <p id="day_val" th:text="${s.day}" th:field="*{day}">${s.day}</p>
+                </div>
+                <div class="res time">
+                    <h3>수강시간</h3>
+                    <p id="time_val" th:text="${#calendars.format(s.classStart, 'HH:mm')} + ' ~ ' + ${#calendars.format(s.classEnd, 'HH:mm')}" th:field="*{classStart} + ' ' + *{classEnd}">${s.classStart} + ' ~ ' + ${s.classEnd}</p>
+                </div>
+                <div class="res person">
+                    <h3>대상</h3>
+                    <p id="person_val" th:text="${s.person}" th:field="*{person}">${s.person}</p>
+                </div>
+                <div class="res period">
+                    <h3>수강 기간 (30일)</h3>
+                    <p id="period_val" th:text="${#calendars.format(s.startDate, 'yyyy-MM-dd')} + ' ~ ' + ${s.endDate}" th:field="*{startDate} + ' ' + *{endDate}">${s.startDate} + ' ~ ' + ${s.endDate}</p>
+                </div>
+                <div class="res price">
+                    <h3>참가비</h3>
+                    <h2 id="price_val" th:text="${s.payment} + ' 원'" th:field="*{payment}">${s.payment} + ' 원'</h2>
+                </div>
+                <div class="res btn">
+                    <button id="check_module" type="submit" class="payment">결제하기</button>
+                    <a th:href="@{/program/list}" class="return">돌아가기</a>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <script>
+        var btnSubmit = document.querySelector('.payment');
+        var btn
+        btnSubmit.addEventListener('click', function(e) {
+            if(!confirm("결제를 진행하겠습니까?")){
+                alert('결제가 취소되었습니다.');
+                e.preventDefault();
+            } else {
+                // var prgCode = btnSubmit.id;
+                // console.log(prgCode);
+            }
+        });
+    </script>
+</body>
+</html>
