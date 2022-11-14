@@ -143,6 +143,6 @@ public class ProgramController {
 	}
 	
 	private List<Integer> dropPayment() {
-		return Arrays.asList(35000, 42000, 18000);
+		return Arrays.asList(10000, 20000, 30000);
 	}
 }

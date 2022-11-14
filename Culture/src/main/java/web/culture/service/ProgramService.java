@@ -42,7 +42,6 @@ public class ProgramService {
 			dto.setCountCurrent(p.getCountCurrent());
 			dto.setCountMax(p.getCountMax());
 			dto.setPayment(p.getPayment());
-			dto.setPaymentState(p.getPaymentType());
 			findList.add(dto);
 		}
 		return findList;
@@ -58,6 +57,7 @@ public class ProgramService {
 		List<ListDto> findList = new ArrayList<ListDto>();
 		
 		for(int i = 0; i < list.size(); i++) {
+			ListDto dto = new ListDto();
 			if(list.get(i).getSubject().equals(searchDto.getSubject())
 				|| list.get(i).getDay().equals(searchDto.getDay())
 				|| list.get(i).getClassStart().equals(Time.valueOf(searchDto.getClassStart()))
@@ -65,25 +65,19 @@ public class ProgramService {
 				|| list.get(i).getPerson().equals(searchDto.getPerson())
 				|| list.get(i).getPayment().equals(searchDto.getPayment())
 				) {
-				ListDto dto = new ListDto();
 				dto.setPrgCode(list.get(i).getPrgCode());
 				dto.setSubject(list.get(i).getSubject());
 				dto.setDay(list.get(i).getDay());
 				dto.setClassStart(list.get(i).getClassStart());
 				dto.setClassEnd(list.get(i).getClassEnd());
 				dto.setPerson(list.get(i).getPerson());
+				dto.setPerson(list.get(i).getPerson());
 				dto.setCountCurrent(list.get(i).getCountCurrent());
 				dto.setCountMax(list.get(i).getCountMax());
 				dto.setPayment(list.get(i).getPayment());
-				dto.setPaymentState(list.get(i).getPaymentType());
 				findList.add(dto);
 			}
 		}
-//		for(int i = 0; i < list.size(); i++) {
-//			if(list.get(i).getSubject() != null) {
-//				
-//			}
-//		}
 		
 		return findList;
 	}

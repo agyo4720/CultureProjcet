@@ -62,7 +62,7 @@
                             <td th:text="${number.count}">${number.count}</td>
                             <td th:text="${e.program.subject}">${e.program.subject}</td>
                             <td th:text="${e.program.day}">${e.program.day}</td>
-                            <td th:text="${e.program.classStart}+' ~ '+${e.program.classEnd}">${e.program.classStart}+' ~ '+${e.program.classEnd}"</td>
+                            <td th:text="${#calendars.format(e.program.classStart, 'HH:mm')} + ' ~ ' + ${#calendars.format(e.program.classEnd, 'HH:mm')}">${e.program.classStart}+' ~ '+${e.program.classEnd}"</td>
                             <td th:text="${e.program.person}">${e.program.person}</td>
                             <td th:text="${e.program.payment}">${e.program.payment}</td>
                             <td th:text="${e.submitStart}+' ~ '+${e.submitEnd}">${e.submitStart}+' ~ '+${e.submitEnd}</td>

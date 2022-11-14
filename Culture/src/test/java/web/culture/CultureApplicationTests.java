@@ -58,17 +58,16 @@ class CultureApplicationTests {
 	@Test
 	public void prgCreate() {
 		Program prg = new Program();
-		prg.setPrgCode("A002");
-		prg.setSubject("수영");
-		prg.setDay("월화수");
-		prg.setClassType("A");
-		prg.setClassStart(Time.valueOf("06:00:00"));
-		prg.setClassEnd(Time.valueOf("06:50:00"));
+		prg.setPrgCode("A103");
+		prg.setSubject("탁구");
+		prg.setDay("주 5일");
+		prg.setClassType("B");
+		prg.setClassStart(Time.valueOf("12:00:00"));
+		prg.setClassEnd(Time.valueOf("12:50:00"));
 		prg.setPerson("성인");
 		prg.setCountCurrent(0);
-		prg.setCountMax(90);
-		prg.setPayment(27000);
-		prg.setPaymentType("실버");
+		prg.setCountMax(30);
+		prg.setPayment(35000);
 		this.programRepository.save(prg);
 	}
 	
@@ -76,7 +75,7 @@ class CultureApplicationTests {
 	@Test
 	public void prgDelete() {
 		List<Program> list = this.programRepository.findAll();
-		this.programRepository.delete(list.get(1));
+		this.programRepository.delete(list.get(0));
 	}
 	
 //	엔트리 생성

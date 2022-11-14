@@ -17,14 +17,6 @@
             <li><a href="/src/main/resources/templates/program/list.html" th:href="@{/program/list}">수강 신청</a></li>
             <li><a href="/src/main/resources/templates/entry/list.html" th:href="@{/entry/list}">수강 내역</a></li>
         </ul>
-
-        <!-- 로그인 X -->
-        <th:block th:if="${session.user == null}">
-	        <ul class="login_menu">
-	            <li><a href="/src/main/resources/templates/user/login.html" th:href="@{/user/login}">로그인</a></li>
-	            <li><a href="/src/main/resources/templates/user/join.html" th:href="@{/user/join}">회원가입</a></li>
-	        </ul>
-        </th:block>
         <!-- 로그인 O -->
         <th:block th:if="${session.user != null}">
 	        <ul class="login_menu">
@@ -60,7 +52,7 @@
                 </div>
                 <div class="res period">
                     <h3>수강 기간 (30일)</h3>
-                    <p id="period_val" th:text="${#calendars.format(s.startDate, 'yyyy-MM-dd')} + ' ~ ' + ${s.endDate}" th:field="*{startDate} + ' ' + *{endDate}">${s.startDate} + ' ~ ' + ${s.endDate}</p>
+                    <p id="period_val" th:text="${s.startDate} + ' ~ ' + ${s.endDate}" th:field="*{startDate} + ' ' + *{endDate}">${s.startDate} + ' ~ ' + ${s.endDate}</p>
                 </div>
                 <div class="res price">
                     <h3>참가비</h3>
@@ -82,7 +74,7 @@
         btnSubmit.addEventListener('click', function(e) {
             if(!confirm("결제를 진행하겠습니까?")){
                 alert('결제가 취소되었습니다.');
-                e.preventDefault();
+                e.preventDefault();			
             } else {
                 // var prgCode = btnSubmit.id;
                 // console.log(prgCode);

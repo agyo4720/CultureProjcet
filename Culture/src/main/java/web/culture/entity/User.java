@@ -37,7 +37,7 @@ public class User implements Serializable {
 	private Date birth;
 	
 	@Column(length=1, nullable=false)
-	private String gender; // 남성 M 여성 F
+	private String gender;
 	
 	@Column(length=300, nullable=false)
 	private String address;

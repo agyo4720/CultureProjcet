@@ -66,7 +66,7 @@
                     </td>
                     <td class="td_fix">교육시간</td>
                     <td class="time_start">
-                        <select id="classStart" name="classStart" th:field="*{classStart}">
+                        <select id="classStart" name="classStart" th:field="*{classStart}" onchange="startOn(this)">
                             <option value='00:00:00'>=== 선택 ===</option>
                             <option th:value="${ds} + ':00'" th:each="ds : ${dropStart}">
                                 <p th:text="${ds}"></p>
@@ -75,7 +75,7 @@
                     </td>
                     <td class="time_block"><p>~</p></td>
                     <td class="time_end">
-                        <select id="classEnd" name="classEnd" th:field="*{classEnd}">
+                        <select id="classEnd" name="classEnd" th:field="*{classEnd}" onchange="endOn(this)">
                             <option value='00:00:00'>=== 선택 ===</option>
                             <option th:value="${de} + ':00'" th:each="de : ${dropEnd}">
                                 <p th:text="${de}"></p>
@@ -151,6 +151,8 @@
     <script>
         var btns = document.querySelectorAll('.unlogin');
         var btnSubs = document.querySelectorAll('.login');
+        var classStart = document.querySelector('#classStart');
+        var classEnd = document.querySelector('#classEnd');
 
         btns.forEach(function(button) {
             button.addEventListener('click', function(e) {
@@ -170,6 +172,24 @@
                 location.href = loc;
             });
         });
+
+        var startVal;
+        var endVal;
+
+        function startOn(e) {
+            startVal = e.value;
+        }
+
+        function endOn(e) {
+            endVal = e.value;
+
+            if(startVal> endVal) {
+                alert('잘못된 입력입니다.');
+            }
+        }
+
+
+        
 
         // http://localhost/program/list.do?subject=%EC%88%98%EC%98%81&day=%EC%A3%BC+5%EC%9D%BC&classStart=06%3A00%3A00&classEnd=06%3A50%3A00&person=%EC%84%B1%EC%9D%B8&payment=35000
     </script>

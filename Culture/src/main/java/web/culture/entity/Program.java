@@ -55,10 +55,6 @@ public class Program {
 	@Column(length=5, nullable=false)
 	private Integer payment;
 	
-//	참가 타입
-	@Column(length=30, nullable=false)
-	private String paymentType;
-	
 	@OneToMany(mappedBy="program", cascade=CascadeType.REMOVE)
 	private List<Entry> entryList;
 }

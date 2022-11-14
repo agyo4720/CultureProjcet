@@ -9,19 +9,19 @@
     <link rel="stylesheet" href="/src/main/resources/static/css/kakaoPaySuccess.css" th:href="@{/css/kakaoPaySuccess.css}">
 </head>
 <body>
+<body>
     <header>
         <a id="logo" href="/src/main/resources/templates/home.html" th:href="@{/}">
             <img src="/src/main/resources/static/img/logo.png" th:src="@{/img/logo.png}" alt="문화센터 로고" width="200px"></a>
 
         <ul class="header_menu">
             <li><a href="/src/main/resources/templates/program/list.html" th:href="@{/program/list}">수강 신청</a></li>
-            <li><a href="/src/main/resources/templates/program/entry.html" th:href="@{/program/entry}">수강 내역</a></li>
+            <li><a href="/src/main/resources/templates/entry/list.html" th:href="@{/entry/list}">수강 내역</a></li>
         </ul>
-
         <!-- 로그인 O -->
         <th:block th:if="${session.user != null}">
-	        <ul class="login_menu"> 
-	        	<li><span>[[${session.user.userName}]]님</span></li>
+	        <ul class="login_menu">
+	        	<li><span value="session.user.userName">[[${session.user.userName}]]님</span></li>
 	        	<li><a th:href="@{/user/logout}">로그아웃</a></li>
 	        </ul>
         </th:block>
