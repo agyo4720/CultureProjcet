@@ -56,6 +56,8 @@ public class KakaoPayController {
 		this.entryService.entryAdd(user, dto.getPrgCode());
 		model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token, session));
 		
+		session.invalidate();
+		
 		return 	"kakaoPaySuccess";
 	}
 	
